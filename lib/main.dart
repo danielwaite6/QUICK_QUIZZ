@@ -55,15 +55,17 @@ class _PerguntaAppState extends State<PerguntaApp> {
         _pontuacaoTotal += pontuacao;
       });
     }
-    //print(_pontuacaoTotal);
+  }
+
+  void _reiniciarQuestionario() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _pontuacaoTotal = 0;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    /*List<Widget> widgets = respostas
-        .map((t) => Resposta(textButton: t, onTap: _responder))
-        .toList();*/
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -75,7 +77,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 perguntas: _perguntas,
                 responder: _responder,
               )
-            : Resultado(pontuacao: _pontuacaoTotal),
+            : Resultado(
+                pontuacao: _pontuacaoTotal,
+                reiniciarQuestionario: _reiniciarQuestionario,
+              ),
       ),
     );
   }
